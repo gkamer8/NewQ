@@ -1,8 +1,11 @@
 body {
-    background-color: black;
+    background-color: white;
+    margin: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif
 }
 nav {
-    background-color: #A51C30;
+    background-color: #f0f0f0;
     width: 100%;
-    border-bottom: 1px black solid;
+    height: 25px;
+    
 }
