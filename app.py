@@ -27,7 +27,6 @@ def query_db(query, args=(), one=False):
 @app.route('/')
 def index():
     courses = query_db('select * from courses')
-    print(courses)
     return render_template("index.html", courses=courses)
 
 
