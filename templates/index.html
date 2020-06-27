@@ -5,8 +5,15 @@
 {% endblock %}
 
 {% block content %}
-  <form method="search">
-    <input name="bar" id="bar" required>
-    <input type="submit" value="Search">
-  </form>
+  <div id="search-form" style="text-align: center">
+    <form method="search">
+      <input name="bar" id="bar" required>
+      <input type="submit" value="Search">
+    </form>
+  </div>
+  {% for item in courses %}
+    <div class="course">
+      <span>{{ item[3] }}</span>
+    </div>
+  {% endfor %}
 {% endblock %}
