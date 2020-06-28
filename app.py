@@ -27,7 +27,8 @@ def query_db(query, args=(), one=False):
 @app.route('/')
 def index():
     cs = query_db('select * from abbreviations')
-    return render_template("index.html", courses=cs)
+    ts = query_db('select * from abbreviations')
+    return render_template("index.html", courses=cs, table_courses=ts[:50])
 
 
 if __name__ == '__main__':

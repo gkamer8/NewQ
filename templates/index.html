@@ -7,19 +7,39 @@
 {% endblock %}
 
 {% block content %}
-  <div id="search-form" style="text-align: center">
-    <form method="search" autocomplete="off">
-      <div class="autocomplete">
-        <input name="bar" id="bar" required>
-      </div>
-      <input type="submit" value="Search">
-    </form>
-  </div>
-  {% for item in courses %}
-    <div class="course">
-      <span>{{ item[2] }}</span>: <span>{{ item[3] }}</span>
+  <div style="text-align: center;display:block;width:100%;">
+    <img src="{{ url_for('static', filename='harvardgems.jpg') }}"/>
+    <div id="search-form">
+      <form method="search" autocomplete="off">
+        <div class="autocomplete">
+          <input name="bar" id="bar" required>
+        </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <input type="submit" value="Search">
+      </form>
     </div>
-  {% endfor %}
+    <br/>
+    <table cellspacing=0px>
+      <tr>
+        <th>Department</th>
+        <th>Number</th>
+        <th>Overall</th>
+        <th>Hours</th>
+        <th>Professor</th>
+        <th>Description</th>
+      </tr>
+      {% for item in table_courses %}
+        <tr class="{{ loop.cycle('odd', 'even') }}">
+          <td>{{ item[2] }}</td>
+          <td>{{ item[3] }}</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
   {% block javascript %}
     <script type=text/javascript src="{{ url_for('static', filename='src/home.js') }}"></script>
     <script type=text/javascript>

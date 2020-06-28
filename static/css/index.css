@@ -3,6 +3,10 @@
   position: relative;
   display: inline-block;
 }
+img {
+  width: 500px;
+  margin: 30px;
+}
 input {
   padding: 7px;
   font-size: 18px;
@@ -10,7 +14,7 @@ input {
 #bar {
   background-color: white;
   border: 1px solid #808080;
-  width: 250px;
+  width: 300px;
 }
 #bar:focus {
   outline-style: none;
@@ -18,7 +22,7 @@ input {
 }
 input[type=submit] {
   border: 1px solid transparent;
-  background-color: crimson;
+  background-color: #A51C30;
   color: #fff;
   cursor: pointer;
 }
@@ -45,6 +49,29 @@ input[type=submit] {
 }
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
-  background-color: crimson !important;
+  background-color: #A51C30 !important;
   color: #ffffff;
+}
+
+table {
+  background-color: #f9f9f9;
+  margin: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+th {
+  text-align: left;
+  padding: 10px;
+  width: 125px;
+  border-bottom: 1px solid black;
+}
+td {
+  padding: 10px;
+  text-align: left;
+}
+.odd {
+  background-color: #f0f0f0;
+}
+.even {
+  background-color: #f9f9f9;
 }
