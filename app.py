@@ -26,7 +26,7 @@ def query_db(query, args=(), one=False):
 
 @app.route('/')
 def index():
-    courses = query_db('select * from courses')
+    courses = query_db('select * from abbreviations')
     return render_template("index.html", courses=courses)
 
 

@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %} - Q2</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        {% block css %}{% endblock %}
     </head>
     <body>
         <nav>
@@ -12,5 +13,6 @@
         <section class="content">
             {% block content %}{% endblock %}
         </section>
+        {% block javascript %}{% endblock %}
     </body>
 </html>

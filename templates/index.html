@@ -1,19 +1,26 @@
 {% extends 'base.html' %}
 
-{% block header %}
-  <h1>{% block title %}Home{% endblock %}</h1>
+<h1>{% block title %}Home{% endblock %}</h1>
+
+{% block css %} 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 
 {% block content %}
   <div id="search-form" style="text-align: center">
-    <form method="search">
-      <input name="bar" id="bar" required>
+    <form method="search" autocomplete="off">
+      <div class="autocomplete">
+        <input name="bar" id="bar" required>
+      </div>
       <input type="submit" value="Search">
     </form>
   </div>
   {% for item in courses %}
     <div class="course">
-      <span>{{ item[3] }}</span>
+      <span>{{ item[2] }}</span>: <span>{{ item[3] }}</span>
     </div>
   {% endfor %}
+  {% block javascript %}
+    <script type=text/javascript src="{{ url_for('static', filename='src/home.js') }}"></script>
+  {% endblock %}
 {% endblock %}
