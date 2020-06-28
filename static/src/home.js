@@ -1,6 +1,12 @@
 function autocomplete(inp, arr) {
   /* AUTOCOMPLETE FUNCTION TAKEN FROM https://www.w3schools.com/howto/howto_js_autocomplete.asp */
   
+  inp.addEventListener("keydown", function(e) {
+    if (e.keyCode == 13) {
+      document.getElementById("search-form").submit();
+    }
+  });
+
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
   var currentFocus;
