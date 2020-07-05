@@ -44,20 +44,57 @@ def index():
         If there are two parts, it's assumed to be a course.
 
         Any other number of separate words trigger a search for all (select * from ___).
+        
+        TODO: allow for searching with CS instead of COMPSCI, and so on
         """
+
+        # Turns potential synonym into proper department
+        # i.e. cs -> COMPSCI or econ -> ECON
+        def synonym(dept):
+            # Alters query to add synonyms
+            # If statements kept in alphabetical order by nickname
+            dept = dept.upper()
+            if dept == "ANTH":
+                return "ANTHRO"
+            elif dept == "ASTRO":
+                return "ASTRON"
+            elif dept == "BIO":
+                return "BIOLOGY"
+            elif dept == "CS":
+                return "COMPSCI"
+            elif dept == "EC":
+                return "ECON"
+            elif dept == "ENGSCI":
+                return "ENG-SCI"
+            elif dept == "GENED":
+                return "GEN-ED"
+            elif dept == "GER":
+                return "GERMAN"
+            elif dept == "HISTLIT":
+                return "HIST-LIT"
+            elif dept == "KOR":
+                return "KOREAN"
+            elif dept == "PHYS":
+                return "PHYSICS"
+            elif dept == "PS":
+                return "PHYSCI"
+            else:
+                return dept
+            
         words = query.split()
         match = re.match(r"([a-zA-Z]+)([0-9]+)(a-zA-Z)*", query, re.I)
+
         if match:
             items = match.groups()
-            q = "SELECT name, number FROM abbreviations WHERE name = ? AND number = ?"
-            table_courses = query_db(q, (items[0].upper(), items[1]))
+            q = "SELECT name, number FROM abbreviations WHERE name LIKE ? AND number = ?"
+            table_courses = query_db(q, (synonym(items[0]), items[1]))
         elif len(words) == 1:
             # Gets only for department
-            q = "SELECT name, number FROM abbreviations WHERE name = ? ORDER BY number"
-            table_courses = query_db(q, (words[0].upper(),))
+            q = "SELECT name, number FROM abbreviations WHERE name LIKE ? ORDER BY number"
+            table_courses = query_db(q, (synonym(words[0]),))
         elif len(words) == 2:
-            q = "SELECT name, number FROM abbreviations WHERE name = ? AND number = ?"
-            table_courses = query_db(q, (words[0].upper(), words[1]))
+            q = "SELECT name, number FROM abbreviations WHERE name LIKE ? AND number = ?"
+            table_courses = query_db(q, (synonym(words[0]), words[1]))
         else:
             table_courses = query_db("SELECT name, number FROM abbreviations")[:50]
     else:
