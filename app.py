@@ -45,10 +45,9 @@ def index():
 
         Any other number of separate words trigger a search for all (select * from ___).
         
-        TODO: allow for searching with CS instead of COMPSCI, and so on
         """
 
-        # Turns potential synonym into proper department
+        # Turns department synonym into proper department
         # i.e. cs -> COMPSCI or econ -> ECON
         def synonym(dept):
             # Alters query to add synonyms
@@ -82,19 +81,20 @@ def index():
                 return dept
             
         words = query.split()
-        match = re.match(r"([a-zA-Z]+)([0-9]+)(a-zA-Z)*", query, re.I)
+        match = re.match(r"([a-zA-Z]+)([0-9]+)([a-zA-Z]*)", query, re.I)
 
         if match:
             items = match.groups()
             q = "SELECT name, number FROM abbreviations WHERE name LIKE ? AND number = ?"
-            table_courses = query_db(q, (synonym(items[0]), items[1]))
+            print(items)
+            table_courses = query_db(q, (synonym(items[0]), items[1] + items[2].upper()))
         elif len(words) == 1:
             # Gets only for department
             q = "SELECT name, number FROM abbreviations WHERE name LIKE ? ORDER BY number"
             table_courses = query_db(q, (synonym(words[0]),))
         elif len(words) == 2:
             q = "SELECT name, number FROM abbreviations WHERE name LIKE ? AND number = ?"
-            table_courses = query_db(q, (synonym(words[0]), words[1]))
+            table_courses = query_db(q, (synonym(words[0]), words[1].upper()))
         else:
             table_courses = query_db("SELECT name, number FROM abbreviations")[:50]
     else:
